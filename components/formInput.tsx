@@ -2,7 +2,7 @@ interface IFormInput {
   type: string;
   placeholder: string;
   required: boolean;
-  error?: string;
+  errors?: string[];
   name: string;
 }
 
@@ -10,7 +10,7 @@ const FormInput = ({
   type,
   placeholder,
   required,
-  error,
+  errors = [],
   name,
 }: IFormInput) => {
   return (
@@ -22,7 +22,13 @@ const FormInput = ({
         required={required}
         name={name}
       />
-      <span className='text-pink-400 text-6xl'>{error}</span>
+      {errors.map((item, idx) => {
+        return (
+          <span key={idx} className='text-pink-400 text-2xl'>
+            {item}
+          </span>
+        );
+      })}
     </div>
   );
 };
